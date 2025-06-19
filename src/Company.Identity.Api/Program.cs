@@ -1,4 +1,4 @@
-using Company.Identity.Composition.Extensions;
+using Company.Identity.Composition.DependencyInjection.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 

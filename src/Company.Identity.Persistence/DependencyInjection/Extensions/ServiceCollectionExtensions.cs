@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Company.Identity.Persistence.Extensions;
+namespace Company.Identity.Persistence.DependencyInjection.Extensions;
 
 public static class ServiceCollectionExtensions
 {

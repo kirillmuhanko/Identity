@@ -1,6 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Company.Identity.Shared.Extensions;
+namespace Company.Identity.Shared.DependencyInjection.Extensions;
 
 public static class ServiceCollectionExtensions
 {
