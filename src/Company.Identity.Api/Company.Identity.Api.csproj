@@ -16,6 +16,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\Company.Identity.Composition\Company.Identity.Composition.csproj" />
       <ProjectReference Include="..\Company.Identity.Persistence\Company.Identity.Persistence.csproj" />
     </ItemGroup>
 

@@ -7,22 +7,15 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="FluentValidation" Version="12.0.0" />
-      <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="12.0.0" />
-      <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.6" />
       <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="9.0.6" />
+      <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.6" />
     </ItemGroup>
 
     <ItemGroup>
-      <Content Update="appsettings.Development.json">
-        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      </Content>
-    </ItemGroup>
-
-    <ItemGroup>
+      <ProjectReference Include="..\Company.Identity.Application\Company.Identity.Application.csproj" />
       <ProjectReference Include="..\Company.Identity.Domain\Company.Identity.Domain.csproj" />
+      <ProjectReference Include="..\Company.Identity.Infrastructure\Company.Identity.Infrastructure.csproj" />
+      <ProjectReference Include="..\Company.Identity.Persistence\Company.Identity.Persistence.csproj" />
       <ProjectReference Include="..\Company.Identity.Shared\Company.Identity.Shared.csproj" />
     </ItemGroup>
 
