@@ -7,6 +7,8 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="FluentValidation" Version="12.0.0" />
+      <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="12.0.0" />
       <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.6" />
     </ItemGroup>
 
@@ -19,11 +21,8 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Repositories\" />
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\Company.Identity.Domain\Company.Identity.Domain.csproj" />
+      <ProjectReference Include="..\Company.Identity.Shared\Company.Identity.Shared.csproj" />
     </ItemGroup>
 
 </Project>
