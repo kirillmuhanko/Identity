@@ -1,4 +1,4 @@
-namespace Company.Identity.Domain.Common.Entities;
+namespace Company.Identity.Domain.Audit.Entities;
 
 public class AuditableEntity
 {

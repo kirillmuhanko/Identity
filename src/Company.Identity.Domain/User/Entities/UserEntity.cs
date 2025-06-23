@@ -1,4 +1,4 @@
-using Company.Identity.Domain.Common.Entities;
+using Company.Identity.Domain.Audit.Entities;
 
 namespace Company.Identity.Domain.User.Entities;
 
@@ -9,15 +9,17 @@ public class UserEntity : AuditableEntity
     {
     }
 
-    public UserEntity(Guid id, string userName, string email)
+    public UserEntity(string userName, string email)
     {
-        Id = id;
         UserName = userName;
         Email = email;
         IsActive = true;
+        CreatedAt = DateTime.UtcNow; // temp
+        CreatedBy = "System"; // temp
     }
 
-    public Guid Id { get; private set; }
+    // ReSharper disable once UnassignedGetOnlyAutoProperty
+    public Guid Id { get; set; }
 
     public string UserName { get; private set; } = null!;
 
