@@ -8,6 +8,7 @@
 
     <ItemGroup>
       <Folder Include="DependencyInjection\" />
+      <Folder Include="User\ValueObjects\" />
     </ItemGroup>
 
     <ItemGroup>
