@@ -19,11 +19,16 @@ public class UserController(ICreateUserHandler createUserHandler) : ControllerBa
             Email = request.Email
         };
 
-        await createUserHandler.HandleAsync(command);
+        var result = await createUserHandler.HandleAsync(command);
+
+        if (!result.Success)
+        {
+            return BadRequest(result.Errors);
+        }
 
         var response = new CreateUserResponse
         {
-            Id = Guid.NewGuid(),
+            Id = Guid.NewGuid(), // This should ideally come from the created user entity
             UserName = request.UserName,
             Email = request.Email
         };
