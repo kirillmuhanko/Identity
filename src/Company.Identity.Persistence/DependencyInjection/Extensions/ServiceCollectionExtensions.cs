@@ -1,7 +1,7 @@
 using Company.Identity.Domain.User.Interfaces.Repositories;
-using Company.Identity.Persistence.Contexts;
-using Company.Identity.Persistence.Repositories;
-using Company.Identity.Persistence.Validators;
+using Company.Identity.Persistence.IdentityDb.Contexts;
+using Company.Identity.Persistence.IdentityDb.Repositories;
+using Company.Identity.Persistence.IdentityDb.Validators;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;

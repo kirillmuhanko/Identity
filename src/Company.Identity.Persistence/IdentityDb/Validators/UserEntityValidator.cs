@@ -1,7 +1,7 @@
 using Company.Identity.Domain.User.Entities;
 using FluentValidation;
 
-namespace Company.Identity.Persistence.Validators;
+namespace Company.Identity.Persistence.IdentityDb.Validators;
 
 public class UserEntityValidator : AbstractValidator<UserEntity>
 {

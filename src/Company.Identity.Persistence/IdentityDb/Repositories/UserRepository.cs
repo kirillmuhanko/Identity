@@ -1,12 +1,12 @@
 using Company.Identity.Domain.User.Entities;
 using Company.Identity.Domain.User.Interfaces.Repositories;
-using Company.Identity.Persistence.Contexts;
+using Company.Identity.Persistence.IdentityDb.Contexts;
 using Company.Identity.Shared.Result.Models;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
-namespace Company.Identity.Persistence.Repositories;
+namespace Company.Identity.Persistence.IdentityDb.Repositories;
 
 public class UserRepository(
     IValidator<UserEntity> validator,
