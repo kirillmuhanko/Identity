@@ -17,9 +17,9 @@ public class UserController(ICreateUserHandler createUserHandler, IMapper mapper
         var command = mapper.Map<CreateUserCommand>(request);
         var result = await createUserHandler.HandleAsync(command);
 
-        if (!result.IsSuccess) 
+        if (!result.IsSuccess)
             return BadRequest(result);
-        
+
         var response = mapper.Map<CreateUserResponse>(result.Value);
         return Ok(response);
     }

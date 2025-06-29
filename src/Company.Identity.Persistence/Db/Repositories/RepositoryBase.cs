@@ -32,7 +32,7 @@ public abstract class RepositoryBase<TEntity>(
         if (!validationResult.IsValid)
         {
             var result = ResultModel<TEntity>.Fail(
-                "Validation failed."
+                "The request could not be processed due to validation errors."
             );
 
             foreach (var error in validationResult.Errors) 
@@ -65,7 +65,7 @@ public abstract class RepositoryBase<TEntity>(
         if (!validationResult.IsValid)
         {
             var result = ResultModel<TEntity>.Fail(
-                "Validation failed."
+                "The request could not be processed due to validation errors."
             );
 
             foreach (var error in validationResult.Errors) 
