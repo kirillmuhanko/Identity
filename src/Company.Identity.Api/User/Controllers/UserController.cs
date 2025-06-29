@@ -17,18 +17,9 @@ public class UserController(ICreateUserHandler createUserHandler, IMapper mapper
         var command = mapper.Map<CreateUserCommand>(request);
         var result = await createUserHandler.HandleAsync(command);
 
-        if (!result.Success)
-        {
-            return BadRequest(result.Errors);
-        }
+        if (!result.Success) return BadRequest(result.Errors);
 
-        var response = new CreateUserResponse
-        {
-            Id = Guid.NewGuid(), // This should ideally come from the created user entity
-            UserName = request.UserName,
-            Email = request.Email
-        };
-
+        var response = mapper.Map<CreateUserResponse>(result.Value);
         return Ok(response);
     }
 }
