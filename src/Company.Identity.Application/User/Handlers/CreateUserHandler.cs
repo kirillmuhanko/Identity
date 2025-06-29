@@ -20,7 +20,8 @@ public class CreateUserHandler(
         var user = new UserEntity(command.UserName, command.Email);
         var result = await userService.AddUserAsync(user);
 
-        if (!result.Success) return ResultModel<CreateUserDto>.Fail(result.Errors);
+        if (!result.IsSuccess) 
+            return ResultModel<CreateUserDto>.FailFrom(result);
 
         var userCreatedEvent = new UserCreatedEvent(result.Value.Email, result.Value.UserName);
         await dispatcher.DispatchAsync(userCreatedEvent);

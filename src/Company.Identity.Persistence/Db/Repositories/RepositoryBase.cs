@@ -1,5 +1,4 @@
 using Company.Identity.Domain.Common.Entities;
-using Company.Identity.Shared.Result.Constants;
 using Company.Identity.Shared.Result.Models;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
@@ -20,8 +19,8 @@ public abstract class RepositoryBase<TEntity>(
         var entity = await _dbSet.FindAsync(id);
         if (entity is null)
             return ResultModel<TEntity>.Fail(
-                ErrorCodes.NotFound,
-                "The requested item could not be found."
+                "The requested item could not be found.",
+                404
             );
 
         return ResultModel<TEntity>.Ok(entity);
@@ -32,13 +31,14 @@ public abstract class RepositoryBase<TEntity>(
         var validationResult = await validator.ValidateAsync(entity);
         if (!validationResult.IsValid)
         {
-            var errors = validationResult.Errors.Select(e => new ErrorDetailModel
-            {
-                Code = ErrorCodes.Validation,
-                Message = e.ErrorMessage
-            }).ToList();
+            var result = ResultModel<TEntity>.Fail(
+                "Validation failed."
+            );
 
-            return ResultModel<TEntity>.Fail(errors);
+            foreach (var error in validationResult.Errors) 
+                result.AddError(error.PropertyName, error.ErrorMessage);
+
+            return result;
         }
 
         try
@@ -53,8 +53,8 @@ public abstract class RepositoryBase<TEntity>(
                 typeof(TEntity).Name, ex.Message);
 
             return ResultModel<TEntity>.Fail(
-                ErrorCodes.SaveFailed,
-                "We couldn't save your changes. Please try again."
+                "We couldn't save your changes. Please try again.",
+                500
             );
         }
     }
@@ -64,13 +64,14 @@ public abstract class RepositoryBase<TEntity>(
         var validationResult = await validator.ValidateAsync(entity);
         if (!validationResult.IsValid)
         {
-            var errors = validationResult.Errors.Select(e => new ErrorDetailModel
-            {
-                Code = ErrorCodes.Validation,
-                Message = e.ErrorMessage
-            }).ToList();
+            var result = ResultModel<TEntity>.Fail(
+                "Validation failed."
+            );
 
-            return ResultModel<TEntity>.Fail(errors);
+            foreach (var error in validationResult.Errors) 
+                result.AddError(error.PropertyName, error.ErrorMessage);
+
+            return result;
         }
 
         try
@@ -85,8 +86,8 @@ public abstract class RepositoryBase<TEntity>(
                 typeof(TEntity).Name, ex.Message);
 
             return ResultModel<TEntity>.Fail(
-                ErrorCodes.UpdateFailed,
-                "We couldn't update the item. Please try again later."
+                "We couldn't update the item. Please try again later.",
+                500
             );
         }
     }
@@ -96,8 +97,8 @@ public abstract class RepositoryBase<TEntity>(
         var entity = await _dbSet.FindAsync(id);
         if (entity is null)
             return ResultModel<bool>.Fail(
-                ErrorCodes.NotFound,
-                "The item you're trying to delete does not exist."
+                "The item you're trying to delete does not exist.",
+                404
             );
 
         try
@@ -112,8 +113,8 @@ public abstract class RepositoryBase<TEntity>(
                 typeof(TEntity).Name, ex.Message);
 
             return ResultModel<bool>.Fail(
-                ErrorCodes.DeleteFailed,
-                "We couldn't delete the item at this time. Please try again."
+                "We couldn't delete the item at this time. Please try again.",
+                500
             );
         }
     }
