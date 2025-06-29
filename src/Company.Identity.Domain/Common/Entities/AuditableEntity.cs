@@ -1,6 +1,6 @@
-namespace Company.Identity.Domain.Audit.Entities;
+namespace Company.Identity.Domain.Common.Entities;
 
-public class AuditableEntity
+public class AuditableEntity : BaseEntity
 {
     public DateTime CreatedAt { get; protected set; }
 
