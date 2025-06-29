@@ -47,7 +47,7 @@ public abstract class RepositoryBase<TEntity>(
             await context.SaveChangesAsync();
             return ResultModel<TEntity>.Ok(entity);
         }
-        catch (DbUpdateException ex)
+        catch (Exception ex)
         {
             logger.LogError(ex, "Error while adding {EntityType}: {Message}",
                 typeof(TEntity).Name, ex.Message);
@@ -79,7 +79,7 @@ public abstract class RepositoryBase<TEntity>(
             await context.SaveChangesAsync();
             return ResultModel<TEntity>.Ok(entity);
         }
-        catch (DbUpdateException ex)
+        catch (Exception ex)
         {
             logger.LogError(ex, "Error while updating {EntityType}: {Message}",
                 typeof(TEntity).Name, ex.Message);
@@ -106,7 +106,7 @@ public abstract class RepositoryBase<TEntity>(
             await context.SaveChangesAsync();
             return ResultModel<bool>.Ok(true);
         }
-        catch (DbUpdateException ex)
+        catch (Exception ex)
         {
             logger.LogError(ex, "Error while deleting {EntityType}: {Message}",
                 typeof(TEntity).Name, ex.Message);
