@@ -1,3 +1,4 @@
+using System.Linq.Expressions;
 using Company.Identity.Domain.Common.Entities;
 using Company.Identity.Shared.Result.Models;
 using FluentValidation;
@@ -13,6 +14,25 @@ public abstract class RepositoryBase<TEntity>(
     where TEntity : BaseEntity
 {
     private readonly DbSet<TEntity> _dbSet = context.Set<TEntity>();
+
+    public virtual async Task<ResultModel<bool>> AnyAsync(Expression<Func<TEntity, bool>> predicate)
+    {
+        try
+        {
+            var exists = await _dbSet.AnyAsync(predicate);
+            return ResultModel<bool>.Ok(exists);
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, "Error while checking existence of {EntityType}: {Message}",
+                typeof(TEntity).Name, ex.Message);
+
+            return ResultModel<bool>.Fail(
+                "Unable to verify existence at this time.",
+                500
+            );
+        }
+    }
 
     public virtual async Task<ResultModel<TEntity>> GetByIdAsync(Guid id)
     {
@@ -35,7 +55,7 @@ public abstract class RepositoryBase<TEntity>(
                 "The request could not be processed due to validation errors."
             );
 
-            foreach (var error in validationResult.Errors) 
+            foreach (var error in validationResult.Errors)
                 result.AddError(error.PropertyName, error.ErrorMessage);
 
             return result;
@@ -68,7 +88,7 @@ public abstract class RepositoryBase<TEntity>(
                 "The request could not be processed due to validation errors."
             );
 
-            foreach (var error in validationResult.Errors) 
+            foreach (var error in validationResult.Errors)
                 result.AddError(error.PropertyName, error.ErrorMessage);
 
             return result;
