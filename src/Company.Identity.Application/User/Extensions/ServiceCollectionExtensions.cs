@@ -2,11 +2,11 @@ using Company.Identity.Application.User.Handlers;
 using Company.Identity.Application.User.Interfaces.Handlers;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Company.Identity.Application.DependencyInjection.Extensions;
+namespace Company.Identity.Application.User.Extensions;
 
 public static class ServiceCollectionExtensions
 {
-    public static IServiceCollection AddApplication(this IServiceCollection services)
+    public static IServiceCollection AddUserApplication(this IServiceCollection services)
     {
         services.AddAutoMapper(typeof(ServiceCollectionExtensions).Assembly);
 

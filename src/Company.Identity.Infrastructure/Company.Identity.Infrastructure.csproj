@@ -11,10 +11,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="DependencyInjection\" />
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\Company.Identity.Application\Company.Identity.Application.csproj" />
     </ItemGroup>
 

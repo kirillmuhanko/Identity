@@ -27,7 +27,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="DependencyInjection\" />
       <Folder Include="IdentityDb\" />
     </ItemGroup>
 

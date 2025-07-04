@@ -6,7 +6,7 @@ using Company.Identity.Application.User.Events;
 using Company.Identity.Application.User.Interfaces.Handlers;
 using Company.Identity.Domain.User.Entities;
 using Company.Identity.Domain.User.Interfaces.Repositories;
-using Company.Identity.Domain.User.Specifications;
+using Company.Identity.Domain.User.Interfaces.Specifications;
 using Company.Identity.Shared.Result.Models;
 
 namespace Company.Identity.Application.User.Handlers;
@@ -14,21 +14,21 @@ namespace Company.Identity.Application.User.Handlers;
 public class CreateUserHandler(
     IEventDispatcher dispatcher,
     IMapper mapper,
+    IUserSpecification userSpecification,
     IUserRepository userRepository) : ICreateUserHandler
 {
     public async Task<ResultModel<CreateUserDto>> HandleAsync(CreateUserCommand command)
     {
-        var userEntity = new UserEntity(command.UserName, command.Email);
-        var userSpecification = new UserSpecification(userEntity);
-        var userWithEmailAndUsernameExistsSpec = userSpecification.UserWithEmailAndUsernameExistsSpec();
-        var isDuplicate = await userRepository.AnyAsync(userWithEmailAndUsernameExistsSpec);
+        var hasEmailAndUserNameSpec = userSpecification.HasUserNameAndEmail(command.UserName, command.Email);
+        var hasEmailAndUserNameResult = await userRepository.AnyAsync(hasEmailAndUserNameSpec);
 
-        if (isDuplicate.Value)
+        if (hasEmailAndUserNameResult.Value)
             return ResultModel<CreateUserDto>.Fail(
                 "A user with the same email and username already exists.",
                 409 // Conflict
             );
 
+        var userEntity = new UserEntity(command.UserName, command.Email);
         var result = await userRepository.AddAsync(userEntity);
 
         if (!result.IsSuccess)

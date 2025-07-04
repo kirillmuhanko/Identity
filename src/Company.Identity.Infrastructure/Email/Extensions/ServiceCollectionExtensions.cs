@@ -7,11 +7,11 @@ using Company.Identity.Infrastructure.Email.Senders;
 using Company.Identity.Infrastructure.Event.Dispatchers;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Company.Identity.Infrastructure.DependencyInjection.Extensions;
+namespace Company.Identity.Infrastructure.Email.Extensions;
 
 public static class ServiceCollectionExtensions
 {
-    public static IServiceCollection AddInfrastructure(this IServiceCollection services)
+    public static IServiceCollection AddEmailInfrastructure(this IServiceCollection services)
     {
         services.AddScoped<IEventDispatcher, InMemoryEventDispatcher>();
         services.AddScoped<IEmailSender, ConsoleEmailSender>();
