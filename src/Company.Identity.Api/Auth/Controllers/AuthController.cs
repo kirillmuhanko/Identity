@@ -1,17 +1,17 @@
 using AutoMapper;
-using Company.Identity.Api.User.Requests;
-using Company.Identity.Api.User.Responses;
-using Company.Identity.Application.User.Commands;
-using Company.Identity.Application.User.Interfaces.Handlers;
+using Company.Identity.Api.Auth.Requests;
+using Company.Identity.Api.Auth.Responses;
+using Company.Identity.Application.Auth.Commands;
+using Company.Identity.Application.Auth.Interfaces.Handlers;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Company.Identity.Api.User.Controllers;
+namespace Company.Identity.Api.Auth.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
-public class UserController(ICreateUserHandler createUserHandler, IMapper mapper) : ControllerBase
+[Route("api/auth")]
+public class AuthController(ICreateUserHandler createUserHandler, IMapper mapper) : ControllerBase
 {
-    [HttpPost]
+    [HttpPost("create-user")]
     public async Task<IActionResult> CreateUser([FromBody] CreateUserRequest request)
     {
         var command = mapper.Map<CreateUserCommand>(request);

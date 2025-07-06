@@ -1,8 +1,8 @@
 using AutoMapper;
-using Company.Identity.Application.User.DTOs;
+using Company.Identity.Application.Auth.DTOs;
 using Company.Identity.Domain.User.Entities;
 
-namespace Company.Identity.Application.User.MappingProfiles;
+namespace Company.Identity.Application.Auth.MappingProfiles;
 
 public class UserMappingProfile : Profile
 {

@@ -1,7 +1,7 @@
-using Company.Identity.Api.User.Requests;
+using Company.Identity.Api.Auth.Requests;
 using FluentValidation;
 
-namespace Company.Identity.Api.User.Validators;
+namespace Company.Identity.Api.Auth.Validators;
 
 public class CreateUserRequestValidator : AbstractValidator<CreateUserRequest>
 {

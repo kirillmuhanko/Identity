@@ -1,4 +1,4 @@
-namespace Company.Identity.Application.User.Events;
+namespace Company.Identity.Application.Auth.Events;
 
 public class UserCreatedEvent(string email, string userName)
 {

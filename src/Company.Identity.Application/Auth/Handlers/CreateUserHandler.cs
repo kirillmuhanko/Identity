@@ -1,16 +1,16 @@
 using AutoMapper;
+using Company.Identity.Application.Auth.Commands;
+using Company.Identity.Application.Auth.DTOs;
+using Company.Identity.Application.Auth.Events;
+using Company.Identity.Application.Auth.Interfaces.Handlers;
 using Company.Identity.Application.Auth.Services;
 using Company.Identity.Application.Event.Interfaces.Dispatchers;
-using Company.Identity.Application.User.Commands;
-using Company.Identity.Application.User.DTOs;
-using Company.Identity.Application.User.Events;
-using Company.Identity.Application.User.Interfaces.Handlers;
 using Company.Identity.Domain.User.Entities;
 using Company.Identity.Domain.User.Interfaces.Repositories;
 using Company.Identity.Domain.User.Interfaces.Specifications;
 using Company.Identity.Shared.Result.Models;
 
-namespace Company.Identity.Application.User.Handlers;
+namespace Company.Identity.Application.Auth.Handlers;
 
 public class CreateUserHandler(
     IAuthService authService,

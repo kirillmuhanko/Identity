@@ -1,6 +1,6 @@
+using Company.Identity.Application.Auth.Events;
 using Company.Identity.Application.Event.Interfaces.Dispatchers;
 using Company.Identity.Application.Event.Interfaces.Handlers;
-using Company.Identity.Application.User.Events;
 using Company.Identity.Infrastructure.Email.Handlers;
 using Company.Identity.Infrastructure.Email.Interfaces.Senders;
 using Company.Identity.Infrastructure.Email.Senders;

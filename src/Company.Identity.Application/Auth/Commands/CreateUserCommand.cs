@@ -1,4 +1,4 @@
-namespace Company.Identity.Application.User.Commands;
+namespace Company.Identity.Application.Auth.Commands;
 
 public class CreateUserCommand
 {

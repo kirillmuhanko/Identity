@@ -1,6 +1,6 @@
-using Company.Identity.Domain.User.Interfaces.Services;
+using Company.Identity.Domain.User.DomainServices;
+using Company.Identity.Domain.User.Interfaces.DomainServices;
 using Company.Identity.Domain.User.Interfaces.Specifications;
-using Company.Identity.Domain.User.Services;
 using Company.Identity.Domain.User.Specifications;
 using Microsoft.Extensions.DependencyInjection;
 

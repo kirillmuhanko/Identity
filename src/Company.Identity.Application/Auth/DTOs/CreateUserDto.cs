@@ -1,4 +1,4 @@
-namespace Company.Identity.Application.User.DTOs;
+namespace Company.Identity.Application.Auth.DTOs;
 
 public class CreateUserDto
 {

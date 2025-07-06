@@ -1,4 +1,4 @@
-namespace Company.Identity.Api.User.Requests;
+namespace Company.Identity.Api.Auth.Requests;
 
 public class CreateUserRequest
 {

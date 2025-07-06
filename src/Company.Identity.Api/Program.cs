@@ -1,4 +1,4 @@
-using Company.Identity.Api.User.Validators;
+using Company.Identity.Api.Auth.Validators;
 using Company.Identity.Composition.DependencyInjection.Extensions;
 using FluentValidation;
 using SharpGrip.FluentValidation.AutoValidation.Mvc.Extensions;

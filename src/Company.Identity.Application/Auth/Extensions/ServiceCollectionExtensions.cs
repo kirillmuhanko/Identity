@@ -1,8 +1,8 @@
-using Company.Identity.Application.User.Handlers;
-using Company.Identity.Application.User.Interfaces.Handlers;
+using Company.Identity.Application.Auth.Handlers;
+using Company.Identity.Application.Auth.Interfaces.Handlers;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Company.Identity.Application.User.Extensions;
+namespace Company.Identity.Application.Auth.Extensions;
 
 public static class ServiceCollectionExtensions
 {

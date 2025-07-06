@@ -1,4 +1,4 @@
-namespace Company.Identity.Api.User.Responses;
+namespace Company.Identity.Api.Auth.Responses;
 
 public class CreateUserResponse
 {
