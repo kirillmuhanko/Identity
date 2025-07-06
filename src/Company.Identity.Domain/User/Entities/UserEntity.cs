@@ -1,21 +1,20 @@
 using Company.Identity.Domain.Common.Entities;
+using Company.Identity.Shared.Email.Rules;
 
 namespace Company.Identity.Domain.User.Entities;
 
-public class UserEntity : AuditableEntity
+public class UserEntity : BaseEntity
 {
     // ReSharper disable once UnusedMember.Global
     public UserEntity()
     {
     }
 
-    public UserEntity( string userName, string email)
+    public UserEntity(string userName, string email, string passwordHash)
     {
-        UserName = userName;
-        Email = email;
-        IsActive = true;
-        CreatedAt = DateTime.UtcNow; // temp
-        CreatedBy = "System"; // temp
+        SetUserName(userName);
+        SetEmail(email);
+        SetPasswordHash(passwordHash);
     }
 
     public string UserName { get; private set; } = null!;
@@ -24,14 +23,22 @@ public class UserEntity : AuditableEntity
 
     public string PasswordHash { get; private set; } = null!;
 
-    public bool IsActive { get; private set; }
-
-    public void Deactivate()
+    public void SetUserName(string name)
     {
-        IsActive = false;
+        if (string.IsNullOrWhiteSpace(name))
+            throw new ArgumentException("Name cannot be empty.");
+        UserName = name.Trim();
     }
 
-    public void ChangePassword(string newPasswordHash)
+    public void SetEmail(string email)
+    {
+        if (!EmailRules.IsEmailFormatValid(email))
+            throw new ArgumentException("Invalid email format.");
+
+        Email = email.Trim().ToLower();
+    }
+
+    public void SetPasswordHash(string newPasswordHash)
     {
         if (string.IsNullOrWhiteSpace(newPasswordHash))
             throw new ArgumentException("Password hash cannot be empty.");

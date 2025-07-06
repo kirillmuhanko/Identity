@@ -1,8 +1,6 @@
 using Company.Identity.Domain.User.Interfaces.Repositories;
 using Company.Identity.Persistence.IdentityDb.Contexts;
 using Company.Identity.Persistence.IdentityDb.Repositories;
-using Company.Identity.Persistence.IdentityDb.Validators;
-using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -20,9 +18,6 @@ public static class ServiceCollectionExtensions
 
         // Repositories
         services.AddScoped<IUserRepository, UserRepository>();
-
-        // Validators
-        services.AddValidatorsFromAssemblyContaining<UserEntityValidator>();
         return services;
     }
 }

@@ -4,7 +4,7 @@ namespace Company.Identity.Application.Auth.Interfaces.Services;
 
 public interface IAuthService
 {
-    string HashPassword(UserEntity user, string password);
+    string HashPassword(string password);
 
     bool VerifyPassword(UserEntity user, string password);
 

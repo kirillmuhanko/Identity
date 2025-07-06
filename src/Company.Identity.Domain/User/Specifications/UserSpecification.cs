@@ -20,9 +20,4 @@ public class UserSpecification : IUserSpecification
     {
         return user => user.UserName == userName && user.Email == email;
     }
-
-    public Expression<Func<UserEntity, bool>> IsActive()
-    {
-        return user => user.IsActive;
-    }
 }

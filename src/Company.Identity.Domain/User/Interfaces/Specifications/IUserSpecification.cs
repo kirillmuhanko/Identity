@@ -10,6 +10,4 @@ public interface IUserSpecification
     Expression<Func<UserEntity, bool>> HasUserName(string userName);
 
     Expression<Func<UserEntity, bool>> HasUserNameAndEmail(string userName, string email);
-
-    Expression<Func<UserEntity, bool>> IsActive();
 }

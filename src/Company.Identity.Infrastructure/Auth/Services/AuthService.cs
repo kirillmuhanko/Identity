@@ -15,9 +15,10 @@ public class AuthService(IOptions<JwtOptions> jwtOptions) : IAuthService
     private readonly PasswordHasher<UserEntity> _hasher = new();
     private readonly JwtOptions _jwtOptions = jwtOptions.Value;
 
-    public string HashPassword(UserEntity user, string password)
+    public string HashPassword(string password)
     {
-        var hashed = _hasher.HashPassword(user, password);
+        var userEntity = new UserEntity();
+        var hashed = _hasher.HashPassword(userEntity, password);
         return hashed;
     }
 

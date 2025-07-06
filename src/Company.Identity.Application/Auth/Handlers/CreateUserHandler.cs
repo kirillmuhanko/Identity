@@ -30,9 +30,8 @@ public class CreateUserHandler(
                 409 // Conflict
             );
 
-        var userEntity = new UserEntity(command.UserName, command.Email);
-        var passwordHash = authService.HashPassword(userEntity, command.Password);
-        userEntity.ChangePassword(passwordHash);
+        var passwordHash = authService.HashPassword(command.Password);
+        var userEntity = new UserEntity(command.UserName, command.Email, passwordHash);
         var result = await userRepository.AddAsync(userEntity);
 
         if (!result.IsSuccess)

@@ -2,5 +2,6 @@ namespace Company.Identity.Domain.Common.Entities;
 
 public abstract class BaseEntity
 {
-    public Guid Id { get; set; }
+    // ReSharper disable once UnusedAutoPropertyAccessor.Global
+    public Guid Id { get; protected set;}
 }
