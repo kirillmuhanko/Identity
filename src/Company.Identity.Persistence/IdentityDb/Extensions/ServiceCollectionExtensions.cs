@@ -11,7 +11,9 @@ namespace Company.Identity.Persistence.IdentityDb.Extensions;
 
 public static class ServiceCollectionExtensions
 {
-    public static IServiceCollection AddIdentityPersistence(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddIdentityPersistence(
+        this IServiceCollection services,
+        IConfiguration configuration)
     {
         services.AddDbContext<IdentityDbContext>(options =>
             options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));

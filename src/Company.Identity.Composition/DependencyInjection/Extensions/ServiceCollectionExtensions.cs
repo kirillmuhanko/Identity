@@ -15,7 +15,7 @@ public static class ServiceCollectionExtensions
     {
         services.AddUserApplication();
         services.AddUserDomain();
-        services.AddAuthInfrastructure();
+        services.AddAuthInfrastructure(configuration);
         services.AddEmailInfrastructure();
         services.AddIdentityPersistence(configuration);
         services.AddTestingFacades();

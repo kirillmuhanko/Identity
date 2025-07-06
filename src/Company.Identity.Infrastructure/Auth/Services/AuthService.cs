@@ -3,15 +3,17 @@ using System.Security.Claims;
 using System.Text;
 using Company.Identity.Application.Auth.Interfaces.Services;
 using Company.Identity.Domain.User.Entities;
+using Company.Identity.Infrastructure.Auth.Options;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
 namespace Company.Identity.Infrastructure.Auth.Services;
 
-public class AuthService(IConfiguration config) : IAuthService
+public class AuthService(IOptions<JwtOptions> jwtOptions) : IAuthService
 {
     private readonly PasswordHasher<UserEntity> _hasher = new();
+    private readonly JwtOptions _jwtOptions = jwtOptions.Value;
 
     public string HashPassword(UserEntity user, string password)
     {
@@ -28,11 +30,7 @@ public class AuthService(IConfiguration config) : IAuthService
 
     public string GenerateJwtToken(UserEntity user)
     {
-        var secretKey = config["Jwt:Key"];
-        var issuer = config["Jwt:Issuer"];
-        var audience = config["Jwt:Audience"];
-
-        var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey!));
+        var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtOptions.Key));
         var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
         var claims = new[]
@@ -42,8 +40,8 @@ public class AuthService(IConfiguration config) : IAuthService
         };
 
         var tokenDescriptor = new JwtSecurityToken(
-            issuer,
-            audience,
+            _jwtOptions.Issuer,
+            _jwtOptions.Audience,
             claims,
             expires: DateTime.UtcNow.AddHours(1),
             signingCredentials: credentials
