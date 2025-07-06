@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Company.Identity.Persistence.IdentityDb.Migrations
 {
     [DbContext(typeof(IdentityDbContext))]
-    [Migration("20250624071409_InitialCreate")]
+    [Migration("20250706082055_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -49,6 +49,10 @@ namespace Company.Identity.Persistence.IdentityDb.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("LastModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PasswordHash")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserName")

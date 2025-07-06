@@ -9,7 +9,7 @@ public class UserEntity : AuditableEntity
     {
     }
 
-    public UserEntity(string userName, string email)
+    public UserEntity( string userName, string email)
     {
         UserName = userName;
         Email = email;
@@ -29,5 +29,16 @@ public class UserEntity : AuditableEntity
     public void Deactivate()
     {
         IsActive = false;
+    }
+
+    public void ChangePassword(string newPasswordHash)
+    {
+        if (string.IsNullOrWhiteSpace(newPasswordHash))
+            throw new ArgumentException("Password hash cannot be empty.");
+
+        if (newPasswordHash == PasswordHash)
+            throw new InvalidOperationException("New password must be different from the current password.");
+
+        PasswordHash = newPasswordHash;
     }
 }

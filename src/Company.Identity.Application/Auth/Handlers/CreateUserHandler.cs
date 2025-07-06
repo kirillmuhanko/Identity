@@ -31,7 +31,8 @@ public class CreateUserHandler(
             );
 
         var userEntity = new UserEntity(command.UserName, command.Email);
-        var passwordHash = authService.HashPassword(userEntity, "test");
+        var passwordHash = authService.HashPassword(userEntity, command.Password);
+        userEntity.ChangePassword(passwordHash);
         var result = await userRepository.AddAsync(userEntity);
 
         if (!result.IsSuccess)
