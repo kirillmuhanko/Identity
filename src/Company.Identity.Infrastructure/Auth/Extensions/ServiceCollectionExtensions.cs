@@ -1,4 +1,4 @@
-using Company.Identity.Application.Auth.Services;
+using Company.Identity.Application.Auth.Interfaces.Services;
 using Company.Identity.Infrastructure.Auth.Services;
 using Microsoft.Extensions.DependencyInjection;
 

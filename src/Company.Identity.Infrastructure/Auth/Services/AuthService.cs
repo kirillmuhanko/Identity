@@ -1,7 +1,7 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using Company.Identity.Application.Auth.Services;
+using Company.Identity.Application.Auth.Interfaces.Services;
 using Company.Identity.Domain.User.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;

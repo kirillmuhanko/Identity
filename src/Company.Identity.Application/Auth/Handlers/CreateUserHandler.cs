@@ -3,7 +3,7 @@ using Company.Identity.Application.Auth.Commands;
 using Company.Identity.Application.Auth.DTOs;
 using Company.Identity.Application.Auth.Events;
 using Company.Identity.Application.Auth.Interfaces.Handlers;
-using Company.Identity.Application.Auth.Services;
+using Company.Identity.Application.Auth.Interfaces.Services;
 using Company.Identity.Application.Event.Interfaces.Dispatchers;
 using Company.Identity.Domain.User.Entities;
 using Company.Identity.Domain.User.Interfaces.Repositories;
