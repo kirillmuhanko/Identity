@@ -1,5 +1,6 @@
 using Company.Identity.Application.User.Extensions;
 using Company.Identity.Domain.User.Extensions;
+using Company.Identity.Infrastructure.Auth.Extensions;
 using Company.Identity.Infrastructure.Email.Extensions;
 using Company.Identity.Persistence.IdentityDb.Extensions;
 using Company.Identity.Shared.System.Extensions;
@@ -14,6 +15,7 @@ public static class ServiceCollectionExtensions
     {
         services.AddUserApplication();
         services.AddUserDomain();
+        services.AddAuthInfrastructure();
         services.AddEmailInfrastructure();
         services.AddIdentityPersistence(configuration);
         services.AddTestingFacades();

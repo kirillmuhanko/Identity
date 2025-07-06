@@ -22,6 +22,8 @@ public class UserEntity : AuditableEntity
 
     public string Email { get; private set; } = null!;
 
+    public string PasswordHash { get; private set; } = null!;
+
     public bool IsActive { get; private set; }
 
     public void Deactivate()

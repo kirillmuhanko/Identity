@@ -1,4 +1,5 @@
 using AutoMapper;
+using Company.Identity.Application.Auth.Services;
 using Company.Identity.Application.Event.Interfaces.Dispatchers;
 using Company.Identity.Application.User.Commands;
 using Company.Identity.Application.User.DTOs;
@@ -12,6 +13,7 @@ using Company.Identity.Shared.Result.Models;
 namespace Company.Identity.Application.User.Handlers;
 
 public class CreateUserHandler(
+    IAuthService authService,
     IEventDispatcher dispatcher,
     IMapper mapper,
     IUserSpecification userSpecification,
@@ -29,6 +31,7 @@ public class CreateUserHandler(
             );
 
         var userEntity = new UserEntity(command.UserName, command.Email);
+        var passwordHash = authService.HashPassword(userEntity, "test");
         var result = await userRepository.AddAsync(userEntity);
 
         if (!result.IsSuccess)
