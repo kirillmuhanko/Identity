@@ -20,7 +20,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="DependencyInjection\" />
+      <Folder Include="CompositionRoot\" />
     </ItemGroup>
 
 </Project>

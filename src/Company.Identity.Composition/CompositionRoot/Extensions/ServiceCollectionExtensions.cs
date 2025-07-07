@@ -7,11 +7,11 @@ using Company.Identity.Shared.System.Extensions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Company.Identity.Composition.DependencyInjection.Extensions;
+namespace Company.Identity.Composition.CompositionRoot.Extensions;
 
 public static class ServiceCollectionExtensions
 {
-    public static IServiceCollection RegisterServices(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddCompositionRootServices(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddUserApplication();
         services.AddUserDomain();

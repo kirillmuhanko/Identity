@@ -18,9 +18,7 @@ public class UserEntity : BaseEntity
     }
 
     public string UserName { get; private set; } = null!;
-
     public string Email { get; private set; } = null!;
-
     public string PasswordHash { get; private set; } = null!;
 
     public void SetUserName(string name)

@@ -1,4 +1,4 @@
-using Company.Identity.Composition.DependencyInjection.Extensions;
+using Company.Identity.Composition.CompositionRoot.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,7 +11,7 @@ builder.Services.AddAutoMapper(typeof(Program).Assembly);
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
-builder.Services.RegisterServices(builder.Configuration);
+builder.Services.AddCompositionRootServices(builder.Configuration);
 
 var app = builder.Build();
 
