@@ -1,4 +1,5 @@
 using System.Linq.Expressions;
+using System.Net;
 using Company.Identity.Domain.Common.Entities;
 using Company.Identity.Shared.Result.Models;
 using Microsoft.EntityFrameworkCore;
@@ -27,7 +28,7 @@ public abstract class RepositoryBase<TEntity>(
 
             return ResultModel<bool>.Fail(
                 "Unable to verify existence at this time.",
-                500
+                HttpStatusCode.InternalServerError
             );
         }
     }
@@ -38,7 +39,7 @@ public abstract class RepositoryBase<TEntity>(
         if (entity is null)
             return ResultModel<TEntity>.Fail(
                 "The requested item could not be found.",
-                404
+                HttpStatusCode.NotFound
             );
 
         return ResultModel<TEntity>.Ok(entity);
@@ -59,7 +60,7 @@ public abstract class RepositoryBase<TEntity>(
 
             return ResultModel<TEntity>.Fail(
                 "We couldn't save your changes. Please try again.",
-                500
+                HttpStatusCode.InternalServerError
             );
         }
     }
@@ -79,7 +80,7 @@ public abstract class RepositoryBase<TEntity>(
 
             return ResultModel<TEntity>.Fail(
                 "We couldn't update the item. Please try again later.",
-                500
+                HttpStatusCode.InternalServerError
             );
         }
     }
@@ -92,7 +93,7 @@ public abstract class RepositoryBase<TEntity>(
             if (entity is null)
                 return ResultModel<bool>.Fail(
                     "The item you're trying to delete does not exist.",
-                    404
+                    HttpStatusCode.NotFound
                 );
 
             _dbSet.Remove(entity);
@@ -106,7 +107,7 @@ public abstract class RepositoryBase<TEntity>(
 
             return ResultModel<bool>.Fail(
                 "We couldn't delete the item at this time. Please try again.",
-                500
+                HttpStatusCode.InternalServerError
             );
         }
     }

@@ -1,3 +1,4 @@
+using System.Net;
 using AutoMapper;
 using Company.Identity.Application.Auth.Commands;
 using Company.Identity.Application.Auth.DTOs;
@@ -27,7 +28,7 @@ public class CreateUserHandler(
         if (hasEmailAndUserNameResult.Value)
             return ResultModel<CreateUserDto>.Fail(
                 "A user with the same email and username already exists.",
-                409 // Conflict
+                HttpStatusCode.Conflict
             );
 
         var passwordHash = authService.HashPassword(command.Password);
