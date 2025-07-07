@@ -1,9 +1,9 @@
 using System.Net;
 using System.Text.Json.Serialization;
 
-namespace Company.Identity.Shared.Result.Models;
+namespace Company.Identity.Shared.Results;
 
-public class ResultModel<T> where T : notnull
+public class OperationResult<T> where T : notnull
 {
     private readonly Dictionary<string, List<string>> _errors = new();
 
@@ -37,7 +37,7 @@ public class ResultModel<T> where T : notnull
         _errors[key].Add(message);
     }
 
-    private void CopyErrorsFrom<TFrom>(ResultModel<TFrom> source) where TFrom : notnull
+    private void CopyErrorsFrom<TFrom>(OperationResult<TFrom> source) where TFrom : notnull
     {
         if (source.Errors is null) return;
 
@@ -46,12 +46,12 @@ public class ResultModel<T> where T : notnull
             AddError(key, msg);
     }
 
-    public static ResultModel<T> Fail(
+    public static OperationResult<T> Fail(
         string title = "Error",
         HttpStatusCode status = HttpStatusCode.BadRequest,
         string type = "https://tools.ietf.org/html/rfc9110#section-15.5.1")
     {
-        return new ResultModel<T>
+        return new OperationResult<T>
         {
             Status = status,
             Title = title,
@@ -59,7 +59,7 @@ public class ResultModel<T> where T : notnull
         };
     }
 
-    public static ResultModel<T> FailFrom<TFrom>(ResultModel<TFrom> source) where TFrom : notnull
+    public static OperationResult<T> FailFrom<TFrom>(OperationResult<TFrom> source) where TFrom : notnull
     {
         var result = Fail(source.Title, source.Status, source.Type);
         result.TraceId = source.TraceId;
@@ -67,11 +67,11 @@ public class ResultModel<T> where T : notnull
         return result;
     }
 
-    public static ResultModel<T> Ok(T data)
+    public static OperationResult<T> Ok(T data)
     {
         ArgumentNullException.ThrowIfNull(data);
 
-        return new ResultModel<T>
+        return new OperationResult<T>
         {
             Status = HttpStatusCode.OK,
             Value = data

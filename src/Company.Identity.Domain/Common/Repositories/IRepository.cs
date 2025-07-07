@@ -1,17 +1,17 @@
 using System.Linq.Expressions;
-using Company.Identity.Shared.Result.Models;
+using Company.Identity.Shared.Results;
 
 namespace Company.Identity.Domain.Common.Repositories;
 
 public interface IRepository<TEntity> where TEntity : class
 {
-    Task<ResultModel<bool>> AnyAsync(Expression<Func<TEntity, bool>> predicate);
+    Task<OperationResult<bool>> AnyAsync(Expression<Func<TEntity, bool>> predicate);
 
-    Task<ResultModel<TEntity>> GetByIdAsync(Guid id);
+    Task<OperationResult<TEntity>> GetByIdAsync(Guid id);
 
-    Task<ResultModel<TEntity>> AddAsync(TEntity entity);
+    Task<OperationResult<TEntity>> AddAsync(TEntity entity);
 
-    Task<ResultModel<TEntity>> UpdateAsync(TEntity entity);
+    Task<OperationResult<TEntity>> UpdateAsync(TEntity entity);
 
-    Task<ResultModel<bool>> DeleteAsync(Guid id);
+    Task<OperationResult<bool>> DeleteAsync(Guid id);
 }

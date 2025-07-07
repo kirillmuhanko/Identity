@@ -9,7 +9,7 @@ using Company.Identity.Application.Event.Interfaces.Dispatchers;
 using Company.Identity.Domain.User.Entities;
 using Company.Identity.Domain.User.Interfaces.Repositories;
 using Company.Identity.Domain.User.Interfaces.Specifications;
-using Company.Identity.Shared.Result.Models;
+using Company.Identity.Shared.Results;
 
 namespace Company.Identity.Application.Auth.Handlers;
 
@@ -20,27 +20,28 @@ public class CreateUserHandler(
     IUserSpecification userSpecification,
     IUserRepository userRepository) : ICreateUserHandler
 {
-    public async Task<ResultModel<CreateUserDto>> HandleAsync(CreateUserCommand command)
+    public async Task<OperationResult<CreateUserDto>> HandleAsync(CreateUserCommand command)
     {
-        var hasEmailAndUserNameSpec = userSpecification.HasUserNameAndEmail(command.UserName, command.Email);
-        var hasEmailAndUserNameResult = await userRepository.AnyAsync(hasEmailAndUserNameSpec);
+        var userExistsSpec = userSpecification.HasUserNameAndEmail(command.UserName, command.Email);
+        var userAlreadyExists = await userRepository.AnyAsync(userExistsSpec);
 
-        if (hasEmailAndUserNameResult.Value)
-            return ResultModel<CreateUserDto>.Fail(
+        if (userAlreadyExists.Value)
+            return OperationResult<CreateUserDto>.Fail(
                 "A user with the same email and username already exists.",
                 HttpStatusCode.Conflict
             );
 
         var passwordHash = authService.HashPassword(command.Password);
         var userEntity = new UserEntity(command.UserName, command.Email, passwordHash);
-        var result = await userRepository.AddAsync(userEntity);
 
-        if (!result.IsSuccess)
-            return ResultModel<CreateUserDto>.FailFrom(result);
+        var createUserResult = await userRepository.AddAsync(userEntity);
+        if (!createUserResult.IsSuccess)
+            return OperationResult<CreateUserDto>.FailFrom(createUserResult);
 
-        var userCreatedEvent = new UserCreatedEvent(result.Value.Email, result.Value.UserName);
+        var userCreatedEvent = new UserCreatedEvent(createUserResult.Value.Email, createUserResult.Value.UserName);
         await dispatcher.DispatchAsync(userCreatedEvent);
-        var createUserDto = mapper.Map<CreateUserDto>(result.Value);
-        return ResultModel<CreateUserDto>.Ok(createUserDto);
+
+        var userDto = mapper.Map<CreateUserDto>(createUserResult.Value);
+        return OperationResult<CreateUserDto>.Ok(userDto);
     }
 }

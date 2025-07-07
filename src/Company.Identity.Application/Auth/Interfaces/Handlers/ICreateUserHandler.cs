@@ -1,10 +1,10 @@
 using Company.Identity.Application.Auth.Commands;
 using Company.Identity.Application.Auth.DTOs;
-using Company.Identity.Shared.Result.Models;
+using Company.Identity.Shared.Results;
 
 namespace Company.Identity.Application.Auth.Interfaces.Handlers;
 
 public interface ICreateUserHandler
 {
-    Task<ResultModel<CreateUserDto>> HandleAsync(CreateUserCommand command);
+    Task<OperationResult<CreateUserDto>> HandleAsync(CreateUserCommand command);
 }
