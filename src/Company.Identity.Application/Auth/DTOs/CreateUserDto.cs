@@ -1,8 +1,9 @@
+using Company.Identity.Domain.User.Entities;
+
 namespace Company.Identity.Application.Auth.DTOs;
 
-public class CreateUserDto
+public record CreateUserDto(Guid Id, string UserName, string Email)
 {
-    public Guid Id { get; set; }
-    public string UserName { get; set; } = null!;
-    public string Email { get; set; } = null!;
+    public static CreateUserDto FromEntity(UserEntity user) =>
+        new(user.Id, user.UserName, user.Email);
 }

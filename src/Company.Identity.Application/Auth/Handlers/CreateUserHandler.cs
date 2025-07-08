@@ -1,5 +1,4 @@
 using System.Net;
-using AutoMapper;
 using Company.Identity.Application.Auth.Commands;
 using Company.Identity.Application.Auth.DTOs;
 using Company.Identity.Application.Auth.Events;
@@ -16,7 +15,6 @@ namespace Company.Identity.Application.Auth.Handlers;
 public class CreateUserHandler(
     IAuthService authService,
     IEventDispatcher dispatcher,
-    IMapper mapper,
     IUserSpecification userSpecification,
     IUserRepository userRepository) : ICreateUserHandler
 {
@@ -40,8 +38,7 @@ public class CreateUserHandler(
 
         var userCreatedEvent = new UserCreatedEvent(createUserResult.Value.Email, createUserResult.Value.UserName);
         await dispatcher.DispatchAsync(userCreatedEvent);
-
-        var userDto = mapper.Map<CreateUserDto>(createUserResult.Value);
+        var userDto = CreateUserDto.FromEntity(createUserResult.Value);
         return OperationResult<CreateUserDto>.Ok(userDto);
     }
 }

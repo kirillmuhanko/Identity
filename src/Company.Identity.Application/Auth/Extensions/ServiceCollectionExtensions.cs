@@ -8,8 +8,6 @@ public static class ServiceCollectionExtensions
 {
     public static IServiceCollection AddUserApplication(this IServiceCollection services)
     {
-        services.AddAutoMapper(typeof(ServiceCollectionExtensions).Assembly);
-
         // Handlers
         services.AddScoped<ICreateUserHandler, CreateUserHandler>();
 
