@@ -3,7 +3,7 @@ using Company.Identity.Shared.Email.Rules;
 
 namespace Company.Identity.Domain.User.Entities;
 
-public class UserEntity : BaseEntity
+public class UserEntity : AuditableEntity
 {
     // ReSharper disable once UnusedMember.Global
     public UserEntity()

@@ -50,7 +50,7 @@ public abstract class RepositoryBase<TEntity>(
         try
         {
             _dbSet.Add(entity);
-            await context.SaveChangesAsync();
+            await SaveAuditableChangesAsync();
             return OperationResult<TEntity>.Ok(entity);
         }
         catch (Exception ex)
@@ -70,7 +70,7 @@ public abstract class RepositoryBase<TEntity>(
         try
         {
             _dbSet.Update(entity);
-            await context.SaveChangesAsync();
+            await SaveAuditableChangesAsync();
             return OperationResult<TEntity>.Ok(entity);
         }
         catch (Exception ex)
@@ -97,7 +97,7 @@ public abstract class RepositoryBase<TEntity>(
                 );
 
             _dbSet.Remove(entity);
-            await context.SaveChangesAsync();
+            await SaveAuditableChangesAsync();
             return OperationResult<bool>.Ok(true);
         }
         catch (Exception ex)
@@ -110,5 +110,22 @@ public abstract class RepositoryBase<TEntity>(
                 HttpStatusCode.InternalServerError
             );
         }
+    }
+
+    private async Task SaveAuditableChangesAsync()
+    {
+        var entries = context.ChangeTracker.Entries<AuditableEntity>();
+
+        foreach (var entry in entries)
+        {
+            var now = DateTime.UtcNow;
+
+            if (entry.State == EntityState.Added)
+                entry.Entity.CreatedAt = now;
+            else if (entry.State == EntityState.Modified) 
+                entry.Entity.UpdatedAt = now;
+        }
+
+        await context.SaveChangesAsync();
     }
 }

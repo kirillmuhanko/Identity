@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Company.Identity.Persistence.IdentityDb.Migrations
 {
     [DbContext(typeof(IdentityDbContext))]
-    [Migration("20250706101055_InitialCreate")]
+    [Migration("20250710124800_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -31,13 +31,22 @@ namespace Company.Identity.Persistence.IdentityDb.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<string>("PasswordHash")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("UserName")
                         .IsRequired()
