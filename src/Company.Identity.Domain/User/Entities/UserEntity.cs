@@ -1,8 +1,10 @@
 using Company.Identity.Domain.Common.Entities;
 using Company.Identity.Shared.Email.Rules;
+using Company.Identity.Shared.Entity.Attributes;
 
 namespace Company.Identity.Domain.User.Entities;
 
+[EntityDisplayName("user")]
 public class UserEntity : AuditableEntity
 {
     // ReSharper disable once UnusedMember.Global
