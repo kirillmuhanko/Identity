@@ -1,14 +1,14 @@
 using System.Reflection;
-using Company.Identity.Shared.Entity.Attributes;
+using Company.Identity.Shared.Metadata.Attributes;
 
-namespace Company.Identity.Shared.Entity.Metadata;
+namespace Company.Identity.Shared.Metadata.Providers;
 
-public static class EntityMetadata
+public static class MetadataProvider
 {
     public static string GetDisplayName<TEntity>()
     {
         var type = typeof(TEntity);
-        var attribute = type.GetCustomAttribute<EntityDisplayNameAttribute>();
+        var attribute = type.GetCustomAttribute<DisplayNameAttribute>();
         var displayName = attribute?.Name;
         var fallbackName = type.Name;
 

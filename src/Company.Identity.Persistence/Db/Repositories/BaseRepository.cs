@@ -1,7 +1,7 @@
 using System.Linq.Expressions;
 using System.Net;
 using Company.Identity.Domain.Common.Entities;
-using Company.Identity.Shared.Entity.Metadata;
+using Company.Identity.Shared.Metadata.Providers;
 using Company.Identity.Shared.Results;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -14,7 +14,7 @@ public abstract class RepositoryBase<TEntity>(
     where TEntity : BaseEntity
 {
     private readonly DbSet<TEntity> _dbSet = context.Set<TEntity>();
-    private readonly string _entityDisplayName = EntityMetadata.GetDisplayName<TEntity>();
+    private readonly string _entityDisplayName = MetadataProvider.GetDisplayName<TEntity>();
 
     public virtual async Task<OperationResult<bool>> AnyAsync(Expression<Func<TEntity, bool>> predicate)
     {
