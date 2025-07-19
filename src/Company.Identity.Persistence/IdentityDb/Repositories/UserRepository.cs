@@ -9,4 +9,7 @@ namespace Company.Identity.Persistence.IdentityDb.Repositories;
 public class UserRepository(
     IdentityDbContext context,
     ILogger<UserRepository> logger)
-    : RepositoryBase<UserEntity>(context, logger), IUserRepository;
+    : RepositoryBase<UserEntity>(context, logger), IUserRepository
+{
+    protected override string EntityDisplayName => "user";
+}

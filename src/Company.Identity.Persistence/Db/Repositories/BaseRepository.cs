@@ -1,7 +1,6 @@
 using System.Linq.Expressions;
 using System.Net;
 using Company.Identity.Domain.Common.Entities;
-using Company.Identity.Shared.Metadata.Providers;
 using Company.Identity.Shared.Results;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -14,7 +13,7 @@ public abstract class RepositoryBase<TEntity>(
     where TEntity : BaseEntity
 {
     private readonly DbSet<TEntity> _dbSet = context.Set<TEntity>();
-    private readonly string _entityDisplayName = MetadataProvider.GetDisplayName<TEntity>();
+    protected virtual string EntityDisplayName => "item";
 
     public virtual async Task<OperationResult<bool>> AnyAsync(Expression<Func<TEntity, bool>> predicate)
     {
@@ -29,7 +28,7 @@ public abstract class RepositoryBase<TEntity>(
                 typeof(TEntity).Name, ex.Message);
 
             return OperationResult<bool>.Fail(
-                $"Unable to verify {_entityDisplayName} existence at this time.",
+                $"Unable to verify {EntityDisplayName} existence at this time.",
                 HttpStatusCode.InternalServerError
             );
         }
@@ -40,7 +39,7 @@ public abstract class RepositoryBase<TEntity>(
         var entity = await _dbSet.FindAsync(id);
         if (entity is null)
             return OperationResult<TEntity>.Fail(
-                $"The requested {_entityDisplayName} could not be found.",
+                $"The requested {EntityDisplayName} could not be found.",
                 HttpStatusCode.NotFound
             );
 
@@ -61,7 +60,7 @@ public abstract class RepositoryBase<TEntity>(
                 typeof(TEntity).Name, ex.Message);
 
             return OperationResult<TEntity>.Fail(
-                $"We couldn't save the {_entityDisplayName}. Please try again.",
+                $"We couldn't save the {EntityDisplayName}. Please try again.",
                 HttpStatusCode.InternalServerError
             );
         }
@@ -81,7 +80,7 @@ public abstract class RepositoryBase<TEntity>(
                 typeof(TEntity).Name, ex.Message);
 
             return OperationResult<TEntity>.Fail(
-                $"We couldn't update the {_entityDisplayName}. Please try again later.",
+                $"We couldn't update the {EntityDisplayName}. Please try again later.",
                 HttpStatusCode.InternalServerError
             );
         }
@@ -94,7 +93,7 @@ public abstract class RepositoryBase<TEntity>(
             var entity = await _dbSet.FindAsync(id);
             if (entity is null)
                 return OperationResult<bool>.Fail(
-                    $"The {_entityDisplayName} you're trying to delete does not exist.",
+                    $"The {EntityDisplayName} you're trying to delete does not exist.",
                     HttpStatusCode.NotFound
                 );
 
@@ -108,7 +107,7 @@ public abstract class RepositoryBase<TEntity>(
                 typeof(TEntity).Name, ex.Message);
 
             return OperationResult<bool>.Fail(
-                $"We couldn't delete the {_entityDisplayName} at this time. Please try again.",
+                $"We couldn't delete the {EntityDisplayName} at this time. Please try again.",
                 HttpStatusCode.InternalServerError
             );
         }
