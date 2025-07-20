@@ -10,6 +10,8 @@ namespace Company.Identity.Api.Auth.Controllers;
 public class AuthController(ICreateUserHandler createUserHandler) : ControllerBase
 {
     [HttpPost("create-user")]
+    [EndpointSummary("Create a new user account.")]
+    [EndpointDescription("Creates a user account with the provided username, email, and password.")]
     public async Task<IActionResult> CreateUser([FromBody] CreateUserRequest request)
     {
         var command = request.ToCommand();
