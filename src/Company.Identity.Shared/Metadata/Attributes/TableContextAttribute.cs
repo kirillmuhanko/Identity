@@ -1,7 +1,7 @@
 namespace Company.Identity.Shared.Metadata.Attributes;
 
-[AttributeUsage(AttributeTargets.Method)]
-public sealed class TableContextAttribute(string tableName) : Attribute
+[AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
+public sealed class TableContextAttribute(params string[] tableNames) : Attribute
 {
-    public string TableName { get; } = tableName;
+    public IReadOnlyList<string> TableNames { get; } = tableNames;
 }
