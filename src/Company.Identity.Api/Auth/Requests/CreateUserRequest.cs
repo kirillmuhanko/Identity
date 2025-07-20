@@ -15,7 +15,7 @@ public record CreateUserRequest(string UserName, string Email, string Password)
     [Required(ErrorMessage = "Email is required.")]
     [EmailAddress(ErrorMessage = "Please enter a valid email address.")]
     [DefaultValue("user@example.com")]
-    [Description("Email address of the user (optional).")]
+    [Description("Email address of the user.")]
     public required string Email { get; init; } = Email;
 
     [Required(ErrorMessage = "Password is required.")]
