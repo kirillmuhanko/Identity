@@ -23,7 +23,7 @@ public class AuthController(ICreateUserHandler createUserHandler) : ControllerBa
         if (!result.IsSuccess)
             return BadRequest(result);
 
-        var response = CreateUserResponse.FromDto(result.Value);
+        var response = CreateUserResponse.From(result.Value);
         return Ok(response);
     }
 }

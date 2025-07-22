@@ -33,12 +33,16 @@ public class CreateUserHandler(
         var userEntity = new UserEntity(command.UserName, command.Email, passwordHash);
 
         var createUserResult = await userRepository.AddAsync(userEntity);
+
         if (!createUserResult.IsSuccess)
             return OperationResult<CreateUserDto>.FailFrom(createUserResult);
 
-        var userCreatedEvent = new UserCreatedEvent(createUserResult.Value.Email, createUserResult.Value.UserName);
+        var jwtToken = authService.GenerateJwtToken(userEntity);
+        var userDto = CreateUserDto.From(createUserResult.Value, jwtToken);
+
+        var userCreatedEvent = new UserCreatedEvent(userDto.Email, userDto.UserName);
         await dispatcher.DispatchAsync(userCreatedEvent);
-        var userDto = CreateUserDto.FromEntity(createUserResult.Value);
+
         return OperationResult<CreateUserDto>.Ok(userDto);
     }
 }

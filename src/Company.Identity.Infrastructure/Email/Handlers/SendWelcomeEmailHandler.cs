@@ -6,10 +6,10 @@ namespace Company.Identity.Infrastructure.Email.Handlers;
 
 public class SendWelcomeEmailHandler(IEmailSender emailSender) : IEventHandler<UserCreatedEvent>
 {
-    public async Task HandleAsync(UserCreatedEvent @event)
+    public async Task HandleAsync(UserCreatedEvent user)
     {
         const string subject = "Welcome!";
-        var body = $"Hi {@event.UserName}, welcome to our platform!";
-        await emailSender.SendAsync(@event.Email, subject, body);
+        var body = $"Hi {user.UserName}, welcome to our platform!";
+        await emailSender.SendAsync(user.Email, subject, body);
     }
 }

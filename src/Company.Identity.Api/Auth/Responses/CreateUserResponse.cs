@@ -22,13 +22,19 @@ public class CreateUserResponse
     [DefaultValue("johndoe@example.com")]
     public required string Email { get; set; }
 
-    public static CreateUserResponse FromDto(CreateUserDto dto)
+    [Required]
+    [Description("JWT authentication token for the created user.")]
+    [DefaultValue("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...")]
+    public required string Token { get; set; }
+
+    public static CreateUserResponse From(CreateUserDto dto)
     {
         return new CreateUserResponse
         {
             Id = dto.Id,
             UserName = dto.UserName,
-            Email = dto.Email
+            Email = dto.Email,
+            Token = dto.Token
         };
     }
 }
