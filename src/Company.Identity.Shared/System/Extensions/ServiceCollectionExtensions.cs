@@ -8,8 +8,7 @@ public static class ServiceCollectionExtensions
 {
     public static IServiceCollection AddTestingFacades(this IServiceCollection services)
     {
-        // Register system facades (e.g., DateTime) to abstract external dependencies and improve testability
-        services.AddScoped<IDateTimeFacade, DateTimeFacade>();
+        services.AddSingleton<IDateTimeFacade, DateTimeFacade>();
         return services;
     }
 }
