@@ -1,7 +1,7 @@
 using System.Net;
 using System.Text.Json.Serialization;
 
-namespace Company.Identity.Shared.Results;
+namespace Company.Identity.Shared.ResultPattern.Results;
 
 public class OperationResult<T> where T : notnull
 {

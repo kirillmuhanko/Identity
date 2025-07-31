@@ -1,5 +1,5 @@
 using System.Linq.Expressions;
-using Company.Identity.Shared.Results;
+using Company.Identity.Shared.ResultPattern.Results;
 
 namespace Company.Identity.Domain.Common.Repositories;
 

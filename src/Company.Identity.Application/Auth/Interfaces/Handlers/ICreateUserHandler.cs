@@ -1,6 +1,6 @@
 using Company.Identity.Application.Auth.Commands;
 using Company.Identity.Application.Auth.DTOs;
-using Company.Identity.Shared.Results;
+using Company.Identity.Shared.ResultPattern.Results;
 
 namespace Company.Identity.Application.Auth.Interfaces.Handlers;
 

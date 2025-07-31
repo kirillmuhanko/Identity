@@ -8,7 +8,7 @@ using Company.Identity.Application.Event.Interfaces.Dispatchers;
 using Company.Identity.Domain.User.Entities;
 using Company.Identity.Domain.User.Interfaces.Repositories;
 using Company.Identity.Domain.User.Interfaces.Specifications;
-using Company.Identity.Shared.Results;
+using Company.Identity.Shared.ResultPattern.Results;
 
 namespace Company.Identity.Application.Auth.Handlers;
 

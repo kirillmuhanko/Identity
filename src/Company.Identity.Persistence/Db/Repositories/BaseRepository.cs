@@ -1,7 +1,7 @@
 using System.Linq.Expressions;
 using System.Net;
 using Company.Identity.Domain.Common.Entities;
-using Company.Identity.Shared.Results;
+using Company.Identity.Shared.ResultPattern.Results;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
