@@ -1,5 +1,5 @@
 using Company.Identity.Domain.Common.Entities;
-using Company.Identity.Shared.Email.Rules;
+using Company.Identity.Shared.Email.Validators;
 
 namespace Company.Identity.Domain.User.Entities;
 
@@ -30,7 +30,7 @@ public class UserEntity : AuditableEntity
 
     public void SetEmail(string email)
     {
-        if (!EmailRules.IsEmailFormatValid(email))
+        if (!EmailValidator.IsEmailFormatValid(email))
             throw new ArgumentException("Invalid email format.");
 
         Email = email.Trim().ToLower();

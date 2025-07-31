@@ -1,8 +1,8 @@
 using System.Text.RegularExpressions;
 
-namespace Company.Identity.Shared.Email.Rules;
+namespace Company.Identity.Shared.Email.Validators;
 
-public static partial class EmailRules
+public static partial class EmailValidator
 {
     private static readonly Regex EmailRegex = MyRegex();
 
