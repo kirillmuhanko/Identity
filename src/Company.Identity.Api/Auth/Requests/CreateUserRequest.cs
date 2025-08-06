@@ -19,9 +19,11 @@ public class CreateUserRequest
     public required string Email { get; set; }
 
     [Required(ErrorMessage = "Password is required.")]
-    [MinLength(6, ErrorMessage = "Password must be at least 6 characters.")]
-    [DefaultValue("P@ssw0rd!")]
-    [Description("Secure password for the user account.")]
+    [MinLength(8,
+        ErrorMessage = "Password must be at least 8 characters and include uppercase, lowercase, number, and symbol.")]
+    [DefaultValue("Str0ngP@ss!")]
+    [Description(
+        "Secure password for the user account. Must be at least 8 characters and include uppercase, lowercase, number, and symbol.")]
     public required string Password { get; set; }
 
     public CreateUserCommand ToCommand()

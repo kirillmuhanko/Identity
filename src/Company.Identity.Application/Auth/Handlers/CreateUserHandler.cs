@@ -6,6 +6,7 @@ using Company.Identity.Application.Auth.Interfaces.Handlers;
 using Company.Identity.Application.Auth.Interfaces.Services;
 using Company.Identity.Application.Event.Interfaces.Dispatchers;
 using Company.Identity.Domain.User.Entities;
+using Company.Identity.Domain.User.Interfaces.DomainServices;
 using Company.Identity.Domain.User.Interfaces.Repositories;
 using Company.Identity.Domain.User.Interfaces.Specifications;
 using Company.Identity.Shared.ResultPattern.Results;
@@ -14,12 +15,17 @@ namespace Company.Identity.Application.Auth.Handlers;
 
 public class CreateUserHandler(
     IAuthService authService,
+    IUserService userService,
     IEventDispatcher dispatcher,
     IUserSpecification userSpecification,
     IUserRepository userRepository) : ICreateUserHandler
 {
     public async Task<OperationResult<CreateUserDto>> HandleAsync(CreateUserCommand command)
     {
+        if (!userService.IsPasswordStrong(command.Password))
+            return OperationResult<CreateUserDto>.Fail(
+                "Password is not strong enough. It must be at least 8 characters and include uppercase, lowercase, number, and symbol.");
+
         var userExistsSpec = userSpecification.HasUserNameAndEmail(command.UserName, command.Email);
         var userAlreadyExists = await userRepository.AnyAsync(userExistsSpec);
 

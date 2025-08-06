@@ -1,3 +1,6 @@
 namespace Company.Identity.Domain.User.Interfaces.DomainServices;
 
-public interface IUserService;
+public interface IUserService
+{
+    bool IsPasswordStrong(string password);
+}
