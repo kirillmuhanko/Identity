@@ -1,17 +1,17 @@
-using Company.Identity.Api.Auth.Requests;
-using Company.Identity.Api.Auth.Responses;
-using Company.Identity.Application.Auth.Interfaces.Handlers;
+using Company.Identity.Api.User.Requests;
+using Company.Identity.Api.User.Responses;
+using Company.Identity.Application.User.Interfaces.Handlers;
 using Company.Identity.Shared.Metadata.Attributes;
 using Company.Identity.Shared.Metadata.Constants;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Company.Identity.Api.Auth.Controllers;
+namespace Company.Identity.Api.User.Controllers;
 
 [ApiController]
-[Route("api/auth")]
-public class AuthController(ICreateUserHandler createUserHandler) : ControllerBase
+[Route("api/users")]
+public class UsersController(ICreateUserHandler createUserHandler) : ControllerBase
 {
-    [HttpPost("create-user")]
+    [HttpPost("create")]
     [EndpointSummary("Create a new user account.")]
     [EndpointDescription("Creates a user account with the provided username, email, and password.")]
     [TableContext(TableNames.Users)]

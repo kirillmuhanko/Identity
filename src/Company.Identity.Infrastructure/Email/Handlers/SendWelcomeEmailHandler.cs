@@ -1,5 +1,5 @@
-using Company.Identity.Application.Auth.Events;
 using Company.Identity.Application.Event.Interfaces.Handlers;
+using Company.Identity.Application.User.Events;
 using Company.Identity.Infrastructure.Email.Interfaces.Senders;
 
 namespace Company.Identity.Infrastructure.Email.Handlers;

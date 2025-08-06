@@ -1,6 +1,6 @@
 using Company.Identity.Domain.User.Entities;
 
-namespace Company.Identity.Application.Auth.DTOs;
+namespace Company.Identity.Application.User.DTOs;
 
 public record CreateUserDto(Guid Id, string UserName, string Email, string Token)
 {

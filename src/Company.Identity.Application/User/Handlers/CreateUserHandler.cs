@@ -1,17 +1,17 @@
 using System.Net;
-using Company.Identity.Application.Auth.Commands;
-using Company.Identity.Application.Auth.DTOs;
-using Company.Identity.Application.Auth.Events;
-using Company.Identity.Application.Auth.Interfaces.Handlers;
 using Company.Identity.Application.Auth.Interfaces.Services;
 using Company.Identity.Application.Event.Interfaces.Dispatchers;
+using Company.Identity.Application.User.Commands;
+using Company.Identity.Application.User.DTOs;
+using Company.Identity.Application.User.Events;
+using Company.Identity.Application.User.Interfaces.Handlers;
 using Company.Identity.Domain.User.Entities;
 using Company.Identity.Domain.User.Interfaces.Repositories;
 using Company.Identity.Domain.User.Interfaces.Specifications;
 using Company.Identity.Domain.User.Interfaces.Validators;
 using Company.Identity.Shared.ResultPattern.Results;
 
-namespace Company.Identity.Application.Auth.Handlers;
+namespace Company.Identity.Application.User.Handlers;
 
 public class CreateUserHandler(
     IAuthService authService,

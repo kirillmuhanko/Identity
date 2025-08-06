@@ -1,8 +1,8 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using Company.Identity.Application.Auth.Commands;
+using Company.Identity.Application.User.Commands;
 
-namespace Company.Identity.Api.Auth.Requests;
+namespace Company.Identity.Api.User.Requests;
 
 public class CreateUserRequest
 {

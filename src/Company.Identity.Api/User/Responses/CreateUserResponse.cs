@@ -1,8 +1,8 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using Company.Identity.Application.Auth.DTOs;
+using Company.Identity.Application.User.DTOs;
 
-namespace Company.Identity.Api.Auth.Responses;
+namespace Company.Identity.Api.User.Responses;
 
 public class CreateUserResponse
 {

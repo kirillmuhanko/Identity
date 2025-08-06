@@ -1,4 +1,4 @@
-using Company.Identity.Application.Auth.Extensions;
+using Company.Identity.Application.User.Extensions;
 using Company.Identity.Domain.User.Extensions;
 using Company.Identity.Infrastructure.Auth.Extensions;
 using Company.Identity.Infrastructure.Email.Extensions;
