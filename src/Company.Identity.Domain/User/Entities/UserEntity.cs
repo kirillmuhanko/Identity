@@ -1,5 +1,4 @@
 using Company.Identity.Domain.Common.Entities;
-using Company.Identity.Shared.Email.Validators;
 
 namespace Company.Identity.Domain.User.Entities;
 
@@ -30,8 +29,8 @@ public class UserEntity : AuditableEntity
 
     public void SetEmail(string email)
     {
-        if (!EmailValidator.IsEmailFormatValid(email))
-            throw new ArgumentException("Invalid email format.");
+        if (string.IsNullOrWhiteSpace(email))
+            throw new ArgumentException("Email cannot be empty.");
 
         Email = email.Trim().ToLower();
     }

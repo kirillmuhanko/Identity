@@ -1,8 +1,8 @@
-using Company.Identity.Domain.User.Interfaces.DomainServices;
+using Company.Identity.Domain.User.Interfaces.Validators;
 
-namespace Company.Identity.Domain.User.DomainServices;
+namespace Company.Identity.Domain.User.Validators;
 
-public class UserService : IUserService
+public class PasswordValidator : IPasswordValidator
 {
     public bool IsPasswordStrong(string password)
     {

@@ -6,25 +6,30 @@ using Company.Identity.Application.Auth.Interfaces.Handlers;
 using Company.Identity.Application.Auth.Interfaces.Services;
 using Company.Identity.Application.Event.Interfaces.Dispatchers;
 using Company.Identity.Domain.User.Entities;
-using Company.Identity.Domain.User.Interfaces.DomainServices;
 using Company.Identity.Domain.User.Interfaces.Repositories;
 using Company.Identity.Domain.User.Interfaces.Specifications;
+using Company.Identity.Domain.User.Interfaces.Validators;
 using Company.Identity.Shared.ResultPattern.Results;
 
 namespace Company.Identity.Application.Auth.Handlers;
 
 public class CreateUserHandler(
     IAuthService authService,
-    IUserService userService,
-    IEventDispatcher dispatcher,
+    IEmailValidator emailValidator,
+    IPasswordValidator passwordValidator,
     IUserSpecification userSpecification,
-    IUserRepository userRepository) : ICreateUserHandler
+    IUserRepository userRepository,
+    IEventDispatcher dispatcher) : ICreateUserHandler
 {
     public async Task<OperationResult<CreateUserDto>> HandleAsync(CreateUserCommand command)
     {
-        if (!userService.IsPasswordStrong(command.Password))
+        if (!passwordValidator.IsPasswordStrong(command.Password))
             return OperationResult<CreateUserDto>.Fail(
                 "Password is not strong enough. It must be at least 8 characters and include uppercase, lowercase, number, and symbol.");
+
+        if (!emailValidator.IsFormatValid(command.Email))
+            return OperationResult<CreateUserDto>.Fail(
+                "Email format is invalid. Please provide a valid email address.");
 
         var userExistsSpec = userSpecification.HasUserNameAndEmail(command.UserName, command.Email);
         var userAlreadyExists = await userRepository.AnyAsync(userExistsSpec);
