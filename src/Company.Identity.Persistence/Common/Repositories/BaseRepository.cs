@@ -5,7 +5,7 @@ using Company.Identity.Shared.ResultPattern.Results;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
-namespace Company.Identity.Persistence.Db.Repositories;
+namespace Company.Identity.Persistence.Common.Repositories;
 
 public abstract class RepositoryBase<TEntity>(
     DbContext context,

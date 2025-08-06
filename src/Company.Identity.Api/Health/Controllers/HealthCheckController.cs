@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Company.Identity.Api.Health.Controllers;
@@ -7,6 +8,7 @@ namespace Company.Identity.Api.Health.Controllers;
 public class HealthCheckController : ControllerBase
 {
     [HttpGet]
+    [AllowAnonymous]
     [EndpointSummary("Perform a basic health check.")]
     [EndpointDescription("Returns a simple health check response indicating the service is running.")]
     public IActionResult Get()

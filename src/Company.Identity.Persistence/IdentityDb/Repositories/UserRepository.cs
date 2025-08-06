@@ -1,6 +1,6 @@
 using Company.Identity.Domain.User.Entities;
 using Company.Identity.Domain.User.Interfaces.Repositories;
-using Company.Identity.Persistence.Db.Repositories;
+using Company.Identity.Persistence.Common.Repositories;
 using Company.Identity.Persistence.IdentityDb.Contexts;
 using Microsoft.Extensions.Logging;
 
