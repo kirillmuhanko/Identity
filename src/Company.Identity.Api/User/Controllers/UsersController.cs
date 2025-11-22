@@ -15,6 +15,7 @@ public class UsersController(ICreateUserHandler createUserHandler) : ControllerB
     [EndpointSummary("Create a new user account.")]
     [EndpointDescription("Creates a user account with the provided username, email, and password.")]
     [TableContext(TableNames.Users)]
+    [ProducesResponseType(typeof(CreateUserResponse), StatusCodes.Status200OK)]
     public async Task<IActionResult> CreateUser([FromBody] CreateUserRequest request)
     {
         var command = request.ToCommand();

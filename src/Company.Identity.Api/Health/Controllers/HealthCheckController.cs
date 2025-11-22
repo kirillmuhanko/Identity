@@ -11,6 +11,7 @@ public class HealthCheckController : ControllerBase
     [AllowAnonymous]
     [EndpointSummary("Perform a basic health check.")]
     [EndpointDescription("Returns a simple health check response indicating the service is running.")]
+    [ProducesResponseType(typeof(object), StatusCodes.Status200OK)]
     public IActionResult Get()
     {
         return Ok(new
